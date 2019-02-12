@@ -46,7 +46,7 @@ class GoldenFileTest:
         return None
 
 
-_default_gold_file_test = GoldenFileTest(Path('.') / "gold_file_test", basic_adapters)
+_default_gold_file_test = GoldenFileTest(Path('.') / "pyautest_assets", basic_adapters)
 
 
 def golden_file_test(name: str, obj: Any) -> bool:
