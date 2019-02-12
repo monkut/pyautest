@@ -1,0 +1,1 @@
+from pyautest.golden_file_test import golden_file_test, GoldenFileTest
