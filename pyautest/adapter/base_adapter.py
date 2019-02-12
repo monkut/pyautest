@@ -18,13 +18,13 @@ class BaseAdapter(ABC, Generic[T]):
     def equal(self, obj1: T, obj2: T) -> bool:
         return obj1 == obj2
 
-    @abstractmethod
     @property
+    @abstractmethod
     def file_extension(self):
         pass
 
-    @abstractmethod
     @property
+    @abstractmethod
     def target_class(self):
         pass
 

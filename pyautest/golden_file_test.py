@@ -23,10 +23,11 @@ class GoldenFileTest:
         filepath = self.file_directory / test_function_name / f"{name}.{adapter.file_extension}"
 
         if not filepath.exists():
+            filepath.parent.mkdir(parents=True, exist_ok=True)
             adapter.save(obj, filepath)
             return True
-
-        return adapter.equal(obj, adapter.load(filepath))
+        other = adapter.load(filepath)
+        return adapter.equal(obj, other)
 
     def _find_adapter(self, obj: Any) -> BaseAdapter:
         for adapter in self.adapters:
@@ -45,8 +46,8 @@ class GoldenFileTest:
         return None
 
 
-default_gold_file_test = GoldenFileTest(Path('.') / "gold_file_test", basic_adapters)
+_default_gold_file_test = GoldenFileTest(Path('.') / "gold_file_test", basic_adapters)
 
 
-def gold_file_test(name: str, obj: Any) -> bool:
-    return default_gold_file_test(name, obj)
+def golden_file_test(name: str, obj: Any) -> bool:
+    return _default_gold_file_test(name, obj)

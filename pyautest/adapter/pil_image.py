@@ -18,5 +18,8 @@ class PILImageAdapter(BaseAdapter[Image.Image]):
     def file_extension(self):
         return 'png'
 
+    def equal(self, obj1: T, obj2: T) -> bool:
+        return obj1.tobytes() == obj2.tobytes()
+
     def diff_description(self, obj1: T, obj2: T) -> str:
         return super().diff_description(obj1, obj2)
