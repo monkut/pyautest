@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import List, Any
 
 from pyautest.adapter import basic_adapters
-from pyautest.adapter.base_adapter import BaseAdapter
+from pyautest.adapter import BaseAdapter
 
 
 class GoldenFileTest:
