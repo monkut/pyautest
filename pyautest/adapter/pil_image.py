@@ -1,3 +1,5 @@
+from typing import FrozenSet
+
 from PIL import Image
 
 from pyautest.adapter.base_adapter import BaseAdapter, T, PathType
