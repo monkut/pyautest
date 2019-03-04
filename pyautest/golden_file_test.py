@@ -32,7 +32,6 @@ class GoldenFileTest:
     def _find_adapter(self, obj: Any) -> BaseAdapter:
         for adapter in self.adapters:
             for cls in adapter.target_classes:
-                print(cls)
                 if isinstance(obj, cls):
                     return adapter
         return None
