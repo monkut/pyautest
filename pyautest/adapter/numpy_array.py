@@ -1,3 +1,5 @@
+from typing import Set, FrozenSet
+
 import numpy
 
 from PIL import Image
@@ -7,7 +9,7 @@ from pyautest.adapter.base_adapter import BaseAdapter, T, PathType
 
 class NumpyArrayAdapter(BaseAdapter[numpy.ndarray]):
     @property
-    def target_class(self):
+    def target_class(self) -> type:
         return numpy.ndarray
 
     def save(self, obj: numpy.ndarray, path: PathType):
