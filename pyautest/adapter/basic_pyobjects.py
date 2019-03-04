@@ -5,6 +5,8 @@ from pyautest.adapter.base_adapter import BaseAdapter, T, PathType
 
 ObjectType = Union[int, float, str, list, dict, set]
 
+# TODO(higumachan): 今はpickleでdumpしてるが、jsonにできるものはjsonにして見て確認しやすくしたい。
+
 
 class BasicPyobjectsAdapter(BaseAdapter[ObjectType]):
     @property
