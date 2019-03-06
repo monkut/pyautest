@@ -7,6 +7,9 @@ PathType = Union[Path, str]
 
 
 class BaseAdapter(ABC, Generic[T]):
+    def __init__(self, allowable_error=0.0001):
+        self.allowable_error = allowable_error
+
     @abstractmethod
     def save(self, obj: T, path: PathType):
         pass

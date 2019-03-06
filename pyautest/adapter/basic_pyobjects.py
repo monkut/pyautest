@@ -11,7 +11,7 @@ ObjectType = Union[int, float, str, list, dict, set]
 class BasicPyobjectsAdapter(BaseAdapter[ObjectType]):
     @property
     def target_classes(self) -> List[type]:
-        return [int, float, str, list, dict, set]
+        return [int, float, str, list, dict, set, tuple]
 
     def save(self, obj: ObjectType, path: PathType):
         return pickle.dump(obj, path.open("wb"))
@@ -24,6 +24,14 @@ class BasicPyobjectsAdapter(BaseAdapter[ObjectType]):
         return 'pkl'
 
     def equal(self, obj1: ObjectType, obj2: ObjectType) -> bool:
+        iteratives = (list, set, tuple)
+        if isinstance(obj1, iteratives) and isinstance(obj2, iteratives):
+            return all([self.equal(o1, o2) for o1, o2 in zip(obj1, obj2)])
+        if isinstance(obj1, dict) and isinstance(obj2, dict):
+            return all([self.equal(o1, o2) for o1, o2 in zip(obj1.items(), obj2.items())])
+
+        if isinstance(obj1, float) and isinstance(obj2, float):
+            return abs(obj1 - obj2) < self.allowable_error
         return obj1 == obj2
 
     def diff_description(self, obj1: T, obj2: T) -> str:
