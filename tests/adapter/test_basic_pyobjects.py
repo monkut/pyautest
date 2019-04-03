@@ -29,6 +29,22 @@ def test_basic_adapter_failed():
         test_zeros()
 
 
+def test_basic_adapter_uneven_list():
+    def test_zeros():
+        a = [0, 0, 0]
+        assert golden_file_test('zeros', a)
+
+    test_zeros()
+
+    def test_zeros():
+        a = [0, 0, 0, 1]
+        return golden_file_test('zeros', a)
+
+    expected = False
+    actual = test_zeros()
+    assert actual == expected
+
+
 def test_basic_allownance_error_success():
     def test_zeros():
         a = 0.0

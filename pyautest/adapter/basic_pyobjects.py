@@ -1,4 +1,5 @@
 import pickle
+from itertools import zip_longest
 from typing import Union, List
 
 from pyautest.adapter.base_adapter import BaseAdapter, T, PathType
@@ -26,7 +27,7 @@ class BasicPyobjectsAdapter(BaseAdapter[ObjectType]):
     def equal(self, obj1: ObjectType, obj2: ObjectType) -> bool:
         iteratives = (list, set, tuple)
         if isinstance(obj1, iteratives) and isinstance(obj2, iteratives):
-            return all([self.equal(o1, o2) for o1, o2 in zip(obj1, obj2)])
+            return all(self.equal(o1, o2) for o1, o2 in zip_longest(obj1, obj2))
         if isinstance(obj1, dict) and isinstance(obj2, dict):
             obj1_keys = set(obj1.keys())
             obj2_keys = set(obj2.keys())
