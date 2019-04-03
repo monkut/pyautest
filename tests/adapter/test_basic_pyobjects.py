@@ -36,6 +36,7 @@ def test_basic_allownance_error_success():
     assert not (_default_gold_file_test.file_directory / 'test_zeros' / "zeros.pkl").exists()
     test_zeros()
     assert (_default_gold_file_test.file_directory / 'test_zeros' / "zeros.pkl").exists()
+
     def test_zeros():
         a = 0.0000001
         assert golden_file_test('zeros', a)
@@ -44,13 +45,14 @@ def test_basic_allownance_error_success():
 
 def test_basic_allownance_error_success_dict():
     def test_zeros():
-        a = {"a": 0.0}
+        a = {"a": 0.0, "b": 6}
         assert golden_file_test('zeros', a)
     assert not (_default_gold_file_test.file_directory / 'test_zeros' / "zeros.pkl").exists()
     test_zeros()
     assert (_default_gold_file_test.file_directory / 'test_zeros' / "zeros.pkl").exists()
+
     def test_zeros():
-        a = {"a": 0.0000001}
+        a = {"b": 6, "a": 0.0000001}
         assert golden_file_test('zeros', a)
     test_zeros()
 
@@ -62,6 +64,7 @@ def test_basic_allownance_error_success_list():
     assert not (_default_gold_file_test.file_directory / 'test_zeros' / "zeros.pkl").exists()
     test_zeros()
     assert (_default_gold_file_test.file_directory / 'test_zeros' / "zeros.pkl").exists()
+
     def test_zeros():
         a = [0.0000001]
         assert golden_file_test('zeros', a)

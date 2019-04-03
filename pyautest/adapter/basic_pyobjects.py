@@ -28,7 +28,14 @@ class BasicPyobjectsAdapter(BaseAdapter[ObjectType]):
         if isinstance(obj1, iteratives) and isinstance(obj2, iteratives):
             return all([self.equal(o1, o2) for o1, o2 in zip(obj1, obj2)])
         if isinstance(obj1, dict) and isinstance(obj2, dict):
-            return all([self.equal(o1, o2) for o1, o2 in zip(obj1.items(), obj2.items())])
+            obj1_keys = set(obj1.keys())
+            obj2_keys = set(obj2.keys())
+            added_keys = obj1_keys - obj2_keys
+            removed_keys = obj2_keys - obj1_keys
+            if added_keys or removed_keys:
+                return False
+            # keys are the same
+            return all(self.equal(obj1[k], obj2[k]) for k in obj1_keys)
 
         if isinstance(obj1, float) and isinstance(obj2, float):
             return abs(obj1 - obj2) < self.allowable_error
